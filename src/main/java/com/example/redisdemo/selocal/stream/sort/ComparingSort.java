@@ -22,16 +22,16 @@ public class ComparingSort {
                 new Student("bv",17,0,"yya"),
                 new Student("df",11,1,"dua")
         );
-        List<Student> configPoList = Lists.newArrayList();
+        /*List<Student> configPoList = Lists.newArrayList();
         List<Student> delete = list.stream()
                 .filter(item -> !configPoList.contains(item))
                 .collect(Collectors.toList());
-        System.out.println(delete);
+        System.out.println(delete);*/
         //按照性别自然排序 再按照年龄倒叙
-        /*list.stream()
+        list.stream()
                 .sorted(Comparator.comparing(Student::getSex)
                         .thenComparing(Student::getAge,Comparator.reverseOrder()))
-                .forEach(System.out::println);*/
+                .forEach(System.out::println);
 
     }
 }
