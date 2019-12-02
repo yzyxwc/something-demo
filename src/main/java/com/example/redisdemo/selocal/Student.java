@@ -1,7 +1,6 @@
 package com.example.redisdemo.selocal;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.ToString;
 

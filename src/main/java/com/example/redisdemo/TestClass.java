@@ -10,8 +10,6 @@ import java.text.MessageFormat;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
-import java.util.Vector;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 public class TestClass {
@@ -75,7 +73,8 @@ public class TestClass {
                 new Student("zq",17,1,"SEC_KILL"),
                 new Student("zq",10,0,"PRE_SALE")
         );
-        Map<PromotionType,List<Integer>> result = list.stream().collect(Collectors.groupingBy(o-> PromotionType.valueOf(o.getPromotionType()),
+        Map<PromotionType,List<Integer>> result = list.stream()
+                .collect(Collectors.groupingBy(o-> PromotionType.valueOf(o.getPromotionType()),
                 Collectors.mapping(Student::getAge, Collectors.toList())));
         System.out.println(result);
     }

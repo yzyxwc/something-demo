@@ -41,6 +41,11 @@ public class RedisConfig {
     @Value("${redis.testWhileIdle}")
     private boolean testWhileIdle;
 
+    @Value("${redis.hostName}")
+    private String hostName;
+
+    @Value("${redis.port}")
+    private Integer port;
 
     @Value("${spring.redis.cluster.nodes}")
     private String clusterNodes;
@@ -84,9 +89,10 @@ public class RedisConfig {
         //连接池
         JedisConnectionFactory.setPoolConfig(jedisPoolConfig);
         //IP地址
-        JedisConnectionFactory.setHostName("127.0.0.1");
+        JedisConnectionFactory.setHostName(hostName);
+        JedisConnectionFactory.setPassword("123");
         //端口号
-        JedisConnectionFactory.setPort(6379);
+        JedisConnectionFactory.setPort(port);
         //如果Redis设置有密码
         //JedisConnectionFactory.setPassword(password);
         //客户端超时时间单位是毫秒
