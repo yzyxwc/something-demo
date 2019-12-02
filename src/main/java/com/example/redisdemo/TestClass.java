@@ -2,6 +2,7 @@ package com.example.redisdemo;
 
 import com.example.redisdemo.enums.PromotionType;
 import com.example.redisdemo.selocal.Student;
+import com.example.redisdemo.selocal.atomic.MyThread;
 import com.example.redisdemo.util.ListsUtil;
 import com.google.common.collect.Lists;
 
@@ -9,6 +10,8 @@ import java.text.MessageFormat;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 public class TestClass {
@@ -19,16 +22,42 @@ public class TestClass {
 
     private final static Student student = new Student("wc",10,1,"COUPON");
 
-    public static void main(String[] args) {
-        changeFinalParam();
+    public static void main(String[] args) throws InterruptedException {
+        //AtomicIntegerDemo();
+        int hash = hash("wc".hashCode());
+        System.out.println(hash);
     }
+
+    public static int hash(int h) {
+        h ^= (h >>> 20) ^ (h >>> 12);
+        return h ^ (h >>> 7) ^ (h >>> 4);
+    }
+    /**
+     * 测试java并发编程的原子性
+     * 这个实现类似 int j = 10
+     * for(int i = 0; i < 10; i++){
+     *     i++;
+     * }
+     */
+    public static void AtomicIntegerDemo() throws InterruptedException {
+        Thread[] threads = new Thread[10];
+        for (int i = 0; i < 10; i++) {
+            threads[i] = new MyThread();
+            threads[i].start();
+        }
+        for (int j=0;j<10;j++){
+            threads[j].join();
+        }
+        System.out.println(MyThread.atomicInteger);
+    }
+
 
     /**
      * 测试final关键字
      * description:final的变量成员变量必须赋初始值
      * 且若变量为引用变量 变量的引用不可变 但变量的值可以改变
      */
-    public static void changeFinalParam(){
+    public final static void changeFinalParam(){
         student.setAge(20);
         System.out.println(student);
     }
