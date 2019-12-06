@@ -5,6 +5,7 @@ import com.example.redisdemo.repository.StudentRepository;
 import com.example.redisdemo.selocal.StudentVo;
 import com.example.redisdemo.service.student.StudentService;
 import com.example.redisdemo.util.ClassCastUtil;
+import com.example.redisdemo.util.JsonUtils;
 import com.example.redisdemo.util.RedisUtil;
 import com.example.redisdemo.vo.StudentReqVo;
 import com.google.common.collect.Lists;
@@ -27,14 +28,15 @@ public class StudentServiceImpl implements StudentService {
         BeanUtils.copyProperties(reqVo,student);
         Student save = studentRepository.save(student);
         if(null != save){
-          return  redisUtil.set("student:"+save.getId().toString(),save);
+          return  redisUtil.set("student:"+save.getId().toString(), JsonUtils.obj2Json(save));
         }
         return Boolean.FALSE;
     }
 
     @Override
     public Student getStudent(String id) {
-        return (Student) redisUtil.get("student:"+id);
+         String object = redisUtil.get("student:"+id).toString();
+         return JsonUtils.json2Obj(object,Student.class);
     }
 
     @Override
