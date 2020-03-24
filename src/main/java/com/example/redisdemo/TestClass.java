@@ -6,6 +6,7 @@ import com.example.redisdemo.selocal.atomic.MyThread;
 import com.example.redisdemo.util.ListsUtil;
 import com.google.common.collect.Lists;
 
+import javax.swing.*;
 import java.text.MessageFormat;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -22,8 +23,39 @@ public class TestClass {
 
     public static void main(String[] args) throws InterruptedException {
         //AtomicIntegerDemo();
-        int hash = hash("wc".hashCode());
-        System.out.println(hash);
+        //int hash = hash("wc".hashCode());
+        //System.out.println(hash);
+        JFrame f = new JFrame("LoL");
+        f.setSize(1000, 1000);
+        f.setLocation(580, 240);
+        f.setLayout(null);
+        JRadioButton b1 = new JRadioButton("亚索");
+        b1.setSelected(true);
+        b1.setBounds(50, 50, 130, 30);
+        JRadioButton b2 = new JRadioButton("剑圣");
+        b2.setBounds(50, 100, 130, 30);
+        JRadioButton b3 = new JRadioButton("卡特");
+        b3.setSelected(true);
+        b3.setBounds(50, 100, 130, 30);
+        JRadioButton b4 = new JRadioButton("曙光女神");
+        b4.setBounds(50, 100, 130, 30);
+
+        // 按钮分组
+        ButtonGroup bg = new ButtonGroup();
+        // 把b1，b2放在 同一个 按钮分组对象里 ，这样同一时间，只有一个 按钮 会被选中
+        bg.add(b1);
+        bg.add(b2);
+        bg.add(b3);
+        bg.add(b4);
+
+        f.add(b1);
+        f.add(b2);
+        f.add(b3);
+        f.add(b4);
+
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        f.setVisible(false);
     }
 
     public static int hash(int h) {

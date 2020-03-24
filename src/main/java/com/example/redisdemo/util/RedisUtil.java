@@ -64,13 +64,18 @@ public class RedisUtil {
      * @param key 可以传一个值 或多个
      */
     @SuppressWarnings("unchecked")
-    public void del(String ... key){
-        if(key!=null&&key.length>0){
-            if(key.length==1){
-                redisTemplate.delete(key[0]);
-            }else{
-                redisTemplate.delete(CollectionUtils.arrayToList(key));
+    public boolean del(String ... key){
+        try {
+            if (key != null && key.length > 0) {
+                if (key.length == 1) {
+                    redisTemplate.delete(key[0]);
+                } else {
+                    redisTemplate.delete(CollectionUtils.arrayToList(key));
+                }
             }
+            return Boolean.TRUE;
+        }catch (Exception e){
+            return Boolean.FALSE;
         }
     }
 
