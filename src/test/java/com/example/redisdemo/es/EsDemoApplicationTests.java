@@ -1,6 +1,11 @@
 package com.example.redisdemo.es;
 
 import com.example.redisdemo.RedisDemoApplication;
+import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.common.unit.Fuzziness;
+import org.elasticsearch.index.query.MatchQueryBuilder;
+import org.elasticsearch.index.query.QueryBuilder;
+import org.elasticsearch.index.query.QueryBuilders;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +28,15 @@ public class EsDemoApplicationTests {
     @Test
     public void testCreateIndex() {
         elasticsearchTemplate.createIndex(Item.class);
+    }
+    public void test(){
+//        SearchResponse searchResponse = client.prepareSearch("test1").setTypes("user1")
+//                .setQuery(QueryBuilders.fuzzyQuery("name", "yb"))
+//                .get();
+        QueryBuilder term = QueryBuilders
+                .multiMatchQuery("ceshi","question")
+                .operator(MatchQueryBuilder.Operator.OR)
+                .minimumShouldMatch("80%");
     }
 }
 
