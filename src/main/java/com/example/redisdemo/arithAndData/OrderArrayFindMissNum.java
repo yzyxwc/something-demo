@@ -37,7 +37,7 @@ public class OrderArrayFindMissNum {
     }
     static {
         for (int i = 1; i < 101; i++) {
-            if(i ==71 || i == 7 ){
+            if(i ==100 || i == 4 ){
                 repeatArrTwice.add(i);
                 continue;
             }
@@ -114,7 +114,8 @@ public class OrderArrayFindMissNum {
     public static String binNumString(Integer tempResult){
         StringBuilder binaryString = new StringBuilder(Integer.toBinaryString(tempResult));
         if(binaryString.length() != 8){
-            for (int i = 0; i < 8 - binaryString.length(); i++) {
+            int length = 8 - binaryString.length();
+            for (int i = 0; i < length; i++) {
                 binaryString.insert(0, "0");
             }
         }
